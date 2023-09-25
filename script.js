@@ -10,29 +10,61 @@ const APIURL = `https://fsa-puppy-bowl.herokuapp.com/api/${cohortName}/`
  * It fetches all players from the API and returns them
  * @returns An array of objects.
  */
+
+// JR: hello
+// HTML DIVS
+// <!-- form to add new players -->
+// <div id="new-player-form"></div>
+
+// <!-- container for all players -->
+// <div id="all-players-container"></div>
+
+// /api/COHORT-NAME/players
 const fetchAllPlayers = async () => {
   try {
+    const response = await fetch(APIURL + 'players')
+    const result = await response.json()
+    console.log(result)
   } catch (err) {
     console.error('Uh oh, trouble fetching players!', err)
   }
 }
 
+// /api/COHORT-NAME/players/PLAYER-ID
 const fetchSinglePlayer = async (playerId) => {
   try {
+    const response = await fetch(APIURL + 'players/' + playerId)
+    const result = await response.json()
+    console.log(result)
   } catch (err) {
     console.error(`Oh no, trouble fetching player #${playerId}!`, err)
   }
 }
 
+// /api/COHORT-NAME/players/
 const addNewPlayer = async (playerObj) => {
   try {
+    const body = JSON.stringify(playerObj)
+    const headers = { 'Content-Type': 'application/json' }
+    const method = 'POST'
+
+    const response = await fetch(APIURL + 'players', { method, headers, body })
+    const result = await response.json()
+
+    console.log(result)
   } catch (err) {
     console.error('Oops, something went wrong with adding that player!', err)
   }
 }
 
+// /api/COHORT-NAME/players/PLAYER-ID
 const removePlayer = async (playerId) => {
   try {
+    const response = await fetch(APIURL + 'players/' + playerId, {
+      method: 'DELETE'
+    })
+    const result = await response.json()
+    console.log(result)
   } catch (err) {
     console.error(`Whoops, trouble removing player #${playerId} from the roster!`, err)
   }
