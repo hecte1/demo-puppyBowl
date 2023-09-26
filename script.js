@@ -24,7 +24,7 @@ const fetchAllPlayers = async () => {
   try {
     const response = await fetch(APIURL + 'players')
     const result = await response.json()
-    console.log(result)
+    return result.data.players;
   } catch (err) {
     console.error('Uh oh, trouble fetching players!', err)
   }
@@ -92,6 +92,20 @@ const removePlayer = async (playerId) => {
  */
 const renderAllPlayers = (playerList) => {
   try {
+    //[player1, player2, player3]
+    playerList.forEach((player)) => {
+      let playerElement = document.createElement('div')
+      playerElement.innerHTML = 
+      <span>${player.name}</span>
+      <br>
+      <span>${player.breed}</span>
+      </br>
+      <img src="${player.imageUrl}" />
+
+      playerContainer.appendChild(playerElement);
+
+
+    }
   } catch (err) {
     console.error('Uh oh, trouble rendering players!', err)
   }
